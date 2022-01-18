@@ -19,55 +19,58 @@
         margin: 0;
         padding: 0;
       }
-      .wrap{
+      .wrap {
         width: 100%;
         height: 100vh;
+        outline: 1px solid red; /* 放這個的原因是什麼？*/
+        position: relative;
+        overflow: hidden;
       }
-      ul{
+      ul {
         list-style: none;
         padding: 0;
         width: 1000%;
         display: flex;
         transition: 1.5s;
       }
-      li{
+      li {
         width: 100%;
       }
-      img{
+      img {
         width: 100%;
         height: 100vh;
         object-fit: cover;
       }
-      .slider-dots{
+      .slider-dots {
         width: 100%;
         position: absolute;
         left: 0;
         bottom: 30px;
         display: flex;
         justify-content: center;
-        margin: 0 auto;  /* 放這個的原因是什麼？ 不是已經下了『<li class="mx-3"></li>』嗎？*/
+        margin: 0 auto; /* 放這個的原因是什麼？ 不是已經下了『<li class="mx-3"></li>』嗎？*/
         z-index: 2; /* 放這個的原因是什麼？*/
       }
-      .slider-dots li{
+      .slider-dots li {
         width: 80px;
         height: 15px;
-        border: 2px solid white;
+        border: 2px solid hotpink;
       }
-      .arrow{
+      .arrow {
         width: 100%;
         height: 100vh;
         padding: 0 30px;
         position: absolute;
-        top: 0;    /* 放這個的原因是什麼？*/
-        right: 0;  /* 放這個的原因是什麼？*/
-        outline: 5px solid red;  /* 放這個的原因是什麼？*/
+        top: 0; /* 放這個的原因是什麼？*/
+        right: 0; /* 放這個的原因是什麼？*/
+        outline: 5px solid red; /* 放這個的原因是什麼？*/
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
-      .arrow i{
+      .arrow i {
         font-size: 50px;
-        color: white;
+        color: #F05E1C;
       }
     </style>
   </head>
@@ -104,13 +107,45 @@
       </div>
     </div>
 
-
     <script src="./jq/jquery-3.6.0.min.js"></script>
     <script src="./bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
     <script>
-      let liIndex = 0
+      let liIndex = 0;
 
-      
+      $(".slider-dots")
+        .find("li")
+        .click(function () {
+          liIndex = $(this).index();
+
+          let change = -liIndex * 100 + "%";
+          console.log(change); // 可以找到每張圖片X軸移動的百分比
+
+          $(this).css("background", "white").siblings().css("background", "");
+
+          $(".slider-imgs").css("margin-left", change);
+
+          console.log(liIndex); // 為何console.log他？？？是可以知道點到第幾個但為何這樣做？
+        });
+
+      let page = liIndex;
+      $(".fa-arrow-circle-right").click(() => {
+        if (page < 9) {
+          page++;
+
+          let change = page * -100 + "%";
+
+          $(".slider-imgs").css("margin-left", change);
+          $(".slider-dots")
+            .find("li")
+            .eq(page)
+            .css("background", "white")
+            .siblings()
+            .css("background", "transparent");
+
+          console.log(page);
+        }
+        
+      });
     </script>
   </body>
 </html>
