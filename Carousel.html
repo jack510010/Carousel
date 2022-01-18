@@ -70,7 +70,7 @@
       }
       .arrow i {
         font-size: 50px;
-        color: #F05E1C;
+        color: #f05e1c;
       }
     </style>
   </head>
@@ -128,11 +128,12 @@
         });
 
       let page = liIndex;
-      $(".fa-arrow-circle-right").click(() => {
+      $(".fa-arrow-circle-right").click(function () {
         if (page < 9) {
           page++;
-
-          let change = page * -100 + "%";
+          let nowIndex = 0;
+          
+          let change = page * -100 + "%" || $(".slider-dots").find("li").click(function(){nowIndex = $(this).index();console.log(nowIndex); ;return nowIndex}) * -100 + "%";
 
           $(".slider-imgs").css("margin-left", change);
           $(".slider-dots")
@@ -144,7 +145,24 @@
 
           console.log(page);
         }
-        
+      });
+
+      $(".fa-arrow-circle-left").click(function () {
+        if (page > 0) {
+          page--;
+          let nowIndex = 0;
+          let change = page * -100 + "%" || $(".slider-dots").find("li").click(function(){nowIndex = $(this).index(); return nowIndex}) * -100 + "%";
+
+          $(".slider-imgs").css("margin-left", change);
+          $(".slider-dots")
+            .find("li")
+            .eq(page)
+            .css("background", "white")
+            .siblings()
+            .css("background", "transparent");
+
+          console.log(page);
+        }
       });
     </script>
   </body>
