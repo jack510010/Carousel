@@ -31,7 +31,7 @@
         transition: 1.5s;
       }
       li{
-        /* width: 100%; */
+        width: 100%;
       }
       img{
         width: 100%;
@@ -39,7 +39,35 @@
         object-fit: cover;
       }
       .slider-dots{
-        
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 30px;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;  /* 放這個的原因是什麼？ 不是已經下了『<li class="mx-3"></li>』嗎？*/
+        z-index: 2; /* 放這個的原因是什麼？*/
+      }
+      .slider-dots li{
+        width: 80px;
+        height: 15px;
+        border: 2px solid white;
+      }
+      .arrow{
+        width: 100%;
+        height: 100vh;
+        padding: 0 30px;
+        position: absolute;
+        top: 0;    /* 放這個的原因是什麼？*/
+        right: 0;  /* 放這個的原因是什麼？*/
+        outline: 5px solid red;  /* 放這個的原因是什麼？*/
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .arrow i{
+        font-size: 50px;
+        color: white;
       }
     </style>
   </head>
@@ -59,16 +87,16 @@
       </ul>
 
       <ul class="slider-dots">
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
-        <li class="mx-3"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
       </ul>
       <div class="arrow">
         <i class="fas fa-arrow-circle-left"></i>
@@ -79,6 +107,10 @@
 
     <script src="./jq/jquery-3.6.0.min.js"></script>
     <script src="./bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
-    <script></script>
+    <script>
+      let liIndex = 0
+
+      
+    </script>
   </body>
 </html>
