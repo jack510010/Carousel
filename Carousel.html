@@ -48,7 +48,7 @@
         bottom: 30px;
         display: flex;
         justify-content: center;
-        margin: 0 auto; /* 放這個的原因是什麼？ 不是已經下了『<li class="mx-3"></li>』嗎？*/
+        /* margin: 0 auto; 放這個的原因是什麼？ 不是已經下了『<li class="mx-3"></li>』嗎？ */
         z-index: 2; /* 放這個的原因是什麼？*/
       }
       .slider-dots li {
@@ -118,57 +118,56 @@
           liIndex = $(this).index();
 
           let change = -liIndex * 100 + "%";
-          console.log(change); // 可以找到每張圖片X軸移動的百分比
+          //console.log(change); // 可以找到每張圖片X軸移動的百分比
 
           $(this).css("background", "white").siblings().css("background", "");
 
           $(".slider-imgs").css("margin-left", change);
 
-          console.log(liIndex); // 為何console.log他？？？是可以知道點到第幾個但為何這樣做？
+          console.log('liIndex',liIndex); // 為何console.log他？？？是可以知道點到第幾個但為何這樣做？
         });
 
-      let page = liIndex;
+      //$(".slider-dots").find("li").click(function () {liIndex = $(this).index();});
+      // console.log(liIndex);
       $(".fa-arrow-circle-right").click(function () {
-        if (page < 9) {
-          page++;
-          let nowIndex = 0;
-          
-          let change = page * -100 + "%" || $(".slider-dots").find("li").click(function(){nowIndex = $(this).index();console.log(nowIndex); ;return nowIndex}) * -100 + "%";
-
+        if (liIndex < 9) {
+          console.log('liIndex',liIndex);
+          let change = (liIndex+1) * -100 + "%";
+          console.log('change',change);
           $(".slider-imgs").css("margin-left", change);
           $(".slider-dots")
             .find("li")
-            .eq(page)
+            .eq(liIndex+1)
             .css("background", "white")
             .siblings()
             .css("background", "transparent");
 
-          console.log(page);
+          liIndex++;
+          console.log(liIndex);
         }
       });
 
       $(".fa-arrow-circle-left").click(function () {
-        if (page > 0) {
-          page--;
-          let nowIndex = 0;
-          let change = page * -100 + "%" || $(".slider-dots").find("li").click(function(){nowIndex = $(this).index(); return nowIndex}) * -100 + "%";
+        if (liIndex > 0) {
+          let change = (liIndex - 1) * -100 + "%";
 
           $(".slider-imgs").css("margin-left", change);
           $(".slider-dots")
             .find("li")
-            .eq(page)
+            .eq(liIndex-1)
             .css("background", "white")
             .siblings()
             .css("background", "transparent");
 
-          console.log(page);
+          // console.log(liIndex);
+          liIndex--;
         }
       });
 
       //timer
       // setInterval(() => {
       //   $(".slider-imgs").animate({"margin-left": "-=100%"});
-      // },2000)    程式碼壞掉了拉～～～～
+      // },2000)   // 程式碼壞掉了拉～～～～
     </script>
   </body>
 </html>
