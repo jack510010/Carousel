@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel</title>
+    <link
+      rel="stylesheet"
+      href="./bootstrap-4.6.1-dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS.animation/CSS.animation.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrap {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        width: 1000%;
+        display: flex;
+        transition: 1.5s;
+      }
+      li {
+        width: 100%;
+      }
+      img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+      }
+      .slider-dots {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 30px;
+        display: flex;
+        justify-content: center;
+        /* margin: 0 auto;  */
+        z-index: 2;
+      }
+      .slider-dots li {
+        width: 80px;
+        height: 15px;
+        border: 2px solid hotpink;
+      }
+      .arrow {
+        width: 100%;
+        height: 100vh;
+        padding: 0 30px;
+        position: absolute;
+        top: 0; /* 放這個的原因是什麼？*/
+        right: 0; /* 放這個的原因是什麼？*/
+        outline: 5px solid red; /* 放這個的原因是什麼？*/
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .arrow i {
+        font-size: 50px;
+        color: #f05e1c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <ul class="slider-imgs">
+        <li><img class="img" src="./imgs/slide0.jpg" alt="" /></li>
+        <li><img class="img" src="./imgs/slide1.jpg" alt="" /></li>
+        <li><img class="img" src="./imgs/slide2.jpg" alt="" /></li>
+        <li><img class="img" src="./imgs/slide3.jpg" alt="" /></li>
+        <li><img class="img" src="./imgs/slide4.jpg" alt="" /></li>
+        <li><img class="img" src="./imgs/slide5.jpg" alt="" /></li>
+        <li><img class="img" src="./imgs/slide6.png" alt="" /></li>
+        <li><img class="img" src="./imgs/slide7.png" alt="" /></li>
+        <li><img class="img" src="./imgs/slide8.png" alt="" /></li>
+        <li><img class="img" src="./imgs/slide9.png" alt="" /></li>
+      </ul>
+
+      <ul class="slider-dots">
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+        <li class="mx-3 mb-2"></li>
+      </ul>
+      <div class="arrow">
+        <i class="fas fa-arrow-circle-left"></i>
+        <i class="fas fa-arrow-circle-right"></i>
+      </div>
+    </div>
+
+    <script src="./jq/jquery-3.6.0.min.js"></script>
+    <script src="./bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <script>
+      let liIndex = 0;
+
+      $(".slider-dots")
+        .find("li")
+        .click(function () {
+          liIndex = $(this).index();
+
+          let change = -liIndex * 100 + "%";
+          //console.log(change); // 可以找到每張圖片X軸移動的百分比
+
+          $(this).css("background", "white").siblings().css("background", "");
+
+          $(".slider-imgs").css("margin-left", change);
+
+          console.log("liIndex", liIndex); // 為何console.log他？？？是可以知道點到第幾個但為何這樣做？
+        });
+
+      //$(".slider-dots").find("li").click(function () {liIndex = $(this).index();});
+      // console.log(liIndex);
+      $(".fa-arrow-circle-right").click(function () {
+        if (liIndex < 9) {
+          console.log("arrow btn liIndex", liIndex);
+          let change = (liIndex + 1) * -100 + "%";
+          console.log("change", change);
+          $(".slider-imgs").css("margin-left", change);
+          $(".slider-dots")
+            .find("li")
+            .eq(liIndex + 1)
+            .css("background", "white")
+            .siblings()
+            .css("background", "transparent");
+
+          liIndex++;
+          console.log(liIndex);
+        }
+      });
+
+      $(".fa-arrow-circle-left").click(function () {
+        if (liIndex > 0) {
+          let change = (liIndex - 1) * -100 + "%";
+
+          $(".slider-imgs").css("margin-left", change);
+          $(".slider-dots")
+            .find("li")
+            .eq(liIndex - 1)
+            .css("background", "white")
+            .siblings()
+            .css("background", "transparent");
+
+          // console.log(liIndex);
+          liIndex--;
+        }
+      });
+      console.log($(".slider-imgs li").width());
+      console.log("offset left slider-imgs", $(".slider-imgs").offset().left);
+      console.log(
+        "offset left slider-imgs li",
+        $(".slider-imgs li").offset().left
+      );
+      console.log($(".slider-imgs li").width() * -10);
+
+      let isRun = true;
+
+      const infinityLoop = function () {
+        if (isRun) {
+          liIndex++; // 先把索引值找出來
+          if (liIndex > 9) liIndex = 0;
+          $(".slider-dots")
+            .find("li")
+            .eq(liIndex)
+            .css("background", "white")
+            .siblings()
+            .css("background", "transparent");
+          
+        }
+
+        console.log(liIndex); // 確認索引值是否是 0 ~ 9。 確認完畢，把變數liIndex帶進去
+        run();
+      };
+      setInterval(infinityLoop, 5000);
+
+      function run() {
+        $(".slider-imgs")
+          .css("margin-left", `-${$(".slider-imgs li").width() * liIndex}px`)
+          .css("transition", "4.5s");
+      }
+
+      $(".wrap").hover(
+        function () {
+          isRun = false;
+        },
+        function () {
+          isRun = true;
+        }
+      );
+
+      $(".slider-dots li").on("click", function () {
+        liIndex = $(this).index();
+        run();
+      });
+      //timer
+      // $(".slider-imgs").each(function () {
+      //   let slideLiImgs = $(this).find("li"),
+      //     slideLiImgsCount = slideLiImgs.length,
+      //     liIndex = 0;
+
+      //     slideLiImgs.eq(liIndex).fadeIn();
+
+      //     setInterval(playNextImg, 2000);
+
+      //     function playNextImg (){
+      //       let nextLiIndex = (liIndex + 1) % slideLiImgsCount;
+      //       console.log(nextLiIndex);
+      //       slideLiImgs.eq(liIndex).fadeOut();
+      //       slideLiImgs.eq(nextLiIndex).fadeIn();
+      //       liIndex = nextLiIndex;
+      //     }
+      // });
+
+      // let i = 0;
+      // setInterval(function changeImg() {
+      //   //$(".slider-imgs").animate({ "margin-left": `-=${$(".wrap").width()}` });
+      //   i++;
+      //   document.querySelector(".img").src="./imgs/slide" + i + ".jpg";
+
+      //   if(i == 9){
+      //     i = 0;
+      //   }
+      // }, 2000);
+
+      //let abc = function(){} es6的寫法
+
+      //function aaa (){} es5的寫法
+    </script>
+  </body>
+</html>

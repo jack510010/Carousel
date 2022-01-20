@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel</title>
+    <link
+      rel="stylesheet"
+      href="./bootstrap-4.6.1-dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS.animation/CSS.animation.css" />
+    <style>
+        .carousel slide{
+            width: 100%;
+            height: 100vh;
+        }
+        img{
+            width: 100%;
+            height: 100vh;
+        }
+        .carousel-inner{
+            width: 100%;
+        }
+        
+    </style>
+  </head>
+  <body>
+      <div
+        id="carouselExampleCaptions"
+        class="carousel slide"
+        data-ride="carousel"
+      >
+        <ol class="carousel-indicators">
+          <li
+            data-target="#carouselExampleCaptions"
+            data-slide-to="0"
+            class="active"
+          ></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="6"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="7"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="8"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="9"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="./imgs/slide0.jpg" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide1.jpg" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide2.jpg" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide3.jpg" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide4.jpg" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide5.jpg " class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide6.png" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide7.png" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide8.png" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./imgs/slide9.png" class="d-block w-100" alt="" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5></h5>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-target="#carouselExampleCaptions"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-target="#carouselExampleCaptions"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </button>
+      </div>
+    
+
+    <script src="./jq/jquery-3.6.0.js"></script>
+    <script src="./bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <script></script>
+  </body>
+</html>
+
+//function run() {
+  $(".slider-imgs")
+    .css("margin-left", `-${$(".slider-imgs li").width() * liIndex}px`)
+    .css("transition", "1.5s");
+    if((liIndex > 9)){
+      $(".slider-imgs")
+    .css("margin-left", `-${$(".slider-imgs li").width() * 10}px`).one("transitionend",function(){
+      $(".slider-imgs").css("transition","none").css("margin-left", `-${$(".slider-imgs li").width() * 0}px`)
+    })
+    }
+}
